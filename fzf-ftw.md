@@ -472,7 +472,9 @@ On peut aussi aller dans l'autre sens:
 
 # Gardons le contact
 
+* Forkez cette présentation [sur github](
+  https://github.com/dmerejkowsky/fzf-ftw)
 * Mon site: [https://dmerej.info](https://dmerej.info)
 * Mastodon: `@dmerej@mamot.fr`
+* IRC: `dmerejkowsky` sur `freenode` et `irc.mozilla.org`
 * Twitter: `@d_merej`
-* [Cette présentation](https://dmerej.info/pub/fzf-ftw)
