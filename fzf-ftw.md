@@ -52,6 +52,9 @@
         bindkey '^[[A' history-beginning-search-backward
         bindkey '^[[B' history-beginning-search-forward
 
+        $ ssh <fléche haut>
+        # Cherche toutes les commandes commençant par `ssh`
+
 * Quand ça veut pas
 
         !bash
@@ -124,7 +127,7 @@ avec la casse.
 
 # Problèmes
 
-Chacun des outils présentés a sa propre façon de faire.
+Chacun des outils présenté a sa propre façon de faire.
 
 Et en plus, chacun a des côtés pénibles
 
@@ -150,7 +153,7 @@ Extrait de mon historique zsh:
 Jamais réussi à le faire marcher sur plusieurs distros en même temps ...
 
 Une fois qu'on a tapé `CTRL-R` on ne voit qu'un choix à la fois, et c'est
-pas pratique ...
+pas pratique.
 
 
 ---
@@ -272,7 +275,9 @@ Et si on veut lancer `ma-commande` une fois pour chaque fichier:
 `fzf.vim` est un plug-in qui enrichit le plug-in vim installé par défaut avec `fzf`
 
 Il fournit des commandes "clé en main" comme `:Buffers`, `:History`, ou
-`:GitFiles`, y a plus qu'à configurer les raccourcis:
+`:GitFiles`.
+
+Après installation, il suffit de configurer vos raccourcis:
 
 
     !vim
@@ -328,7 +333,7 @@ Dans `~/.local/share/zsh/cwd.json`:
 
 # Un petit bout de Python
 
-Un petit bout de Python pour implémenter:
+Un petit bout de Python/argparse pour implémenter:
 
 * `cwd add CHEMIN`: Incrémente le compteur pour le chemin donné
 * `cwd edit`
@@ -337,7 +342,8 @@ Un petit bout de Python pour implémenter:
 
 <br />
 
-<small>Vous avez le droit d'utiliser des langages moins bien si vous préférez</small>
+<small>Vous avez le droit d'utiliser des langages/libraries moins bien si vous
+préférez</small>
 
 ---
 
@@ -382,7 +388,7 @@ Dans `.zshrc`:
     bindkey '\ed' fzf-cd-widget
     bindkey -s '\ec' '\ed\n'
 
-Oui y en a deux. Le second appelle le premier et rajoute '\n' à la fin.
+Oui il y en a deux. Le second appelle le premier et rajoute '\n' à la fin.
 J'ai pas trouvé mieux :/
 
 ---
