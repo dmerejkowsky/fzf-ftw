@@ -52,7 +52,7 @@
         bindkey '^[[A' history-beginning-search-backward
         bindkey '^[[B' history-beginning-search-forward
 
-        $ ssh <fléche haut>
+        $ ssh <flèche haut>
         # Cherche toutes les commandes commençant par `ssh`
 
 * Quand ça veut pas
@@ -212,6 +212,8 @@ rapidement le bon choix.
 
 Pas besoin de taper *exactement* un bout de ligne: c'est ça la partie
 "fuzzy"
+
+Plein d'infos dans `man fzf` aussi!
 
 ---
 
@@ -393,13 +395,35 @@ J'ai pas trouvé mieux :/
 
 ---
 
+# Ou sinon
+
+Pour les gens qui veulent pas changer leurs habitudes:
+
+    !bash
+	cwd_list=$(cwd-history list)
+	if [[ -n $1 ]]
+	then
+		cwd_list=$(echo $cwd_list | grep --ignore-case $1)
+	fi
+	ret="$(echo $cwd_list| fzf --tac)"
+	cd "${ret}"
+	if [[ $? -ne 0 ]]
+	then
+		cwd-history remove "${ret}"
+
+	fi
+
+
+
 # Un dernier truc cool
 
 On peut aussi partager des infos entre vim et le shell.
 
 ---
 
-# Changer de répertoire neovim quitte
+# De neovim vers le shell
+
+Dans `~/.vimrc`:
 
     !vim
     " Write cwd when leaving
@@ -409,6 +433,7 @@ On peut aussi partager des infos entre vim et le shell.
 
     autocmd VimLeave * silent call WriteCWD()
 
+Dans `~/.zshrc`:
 
     !bash
     " Change working dir after neovim exits
@@ -420,13 +445,13 @@ On peut aussi partager des infos entre vim et le shell.
     }
 
 
-Oui, c'est dégueu
+Oui, c'est pas très propre :P
 
 ---
 
-# Lire les chemins dans vim
+# Du shell vers neovim
 
-Plus propre:
+On peut aussi aller dans l'autre sens:
 
     !vim
     function ListWorkingDirs()
@@ -442,3 +467,12 @@ Plus propre:
 ---
 
 # Une démo pour finir
+
+---
+
+# Gardons le contact
+
+* Mon site: [https://dmerej.info](https://dmerej.info)
+* Mastodon: `@dmerej@mamot.fr`
+* Twitter: `@d_merej`
+* [Cette présentation](https://dmerej.info/pub/fzf-ftw)
