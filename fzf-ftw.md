@@ -246,27 +246,58 @@ Quand la liste est très grande, `fzf` permet quand même de sélectionner
 
 # Démo 2
 
-Lister les fichiers d'un répertoire:
+---
 
-`CTRL-T` par défaut
+# fzf de base
 
 ---
 
-# Remplacer find?
+# Historique
+
+* Vous pouvez dire à `fzf` de se lancer quand vous faites 'CTRL-R'
+
+* Comme moi, vous pouvez aussi dire à fzf de se lancer quand vous faites
+  flèche-haut:
+
+
+        !zsh
+        bindkey '^[[A' fzf-history-widget
+
+---
+
+# Remplacer find (1)
+
+Lister les fichiers d'un répertoire (récursivement)
+
+`CTRL-T` par défaut:
+
+Du coup vous pouvez faire:
+
+      $ vim <ctrl-t>
+
+
+Et quand vous aurez sélectionné le bon fichier dans fzf vous avez
+juste à appuyer sur entrée pour l'ouvrir dans vim.
+
+
+---
+
+# Remplacer find (2)
 
 Quand on veut éxecuter *une* commande sur *un fichier* particulier et qu'on
 connaît à peu près son nom, `fzf` est très bien.
 
-Pour lancer une commande avec plusieurs fichiers, on peut faire:
+Dans les autres cas:
+
+* Pour lancer une commande avec plusieurs fichiers, on peut faire:
 
     !bash
-    $ ma-commande */**.txt
+    $ ma-commande **/*.txt
 
-Et si on veut lancer `ma-commande` une fois pour chaque fichier:
+* Et si on veut lancer `ma-commande` une fois pour chaque fichier:
 
     ! bash
     $ find . -name *.txt | xargs -n1 ma-commande
-
 
 (C'est l'option `-n` de `xargs`, peu connue)
 
@@ -397,22 +428,24 @@ J'ai pas trouvé mieux :/
 
 # Ou sinon
 
-Pour les gens qui veulent pas changer leurs habitudes:
+Pour les gens qui veulent pas changer leurs habitudes, on peut
+ré-implementer `z` complètement:
+
 
     !bash
-	cwd_list=$(cwd-history list)
-	if [[ -n $1 ]]
-	then
-		cwd_list=$(echo $cwd_list | grep --ignore-case $1)
-	fi
-	ret="$(echo $cwd_list| fzf --tac)"
-	cd "${ret}"
-	if [[ $? -ne 0 ]]
-	then
-		cwd-history remove "${ret}"
+    function z() {
+      cwd_list=$(cwd-history list)
+      if [[ -n $1 ]]; then
+        cwd_list=$(echo $cwd_list | grep --ignore-case $1)
+      fi
+      ret="$(echo $cwd_list| fzf --tac)"
+      cd "${ret}"
+      if [[ $? -ne 0 ]]; then
+        cwd-history remove "${ret}"
+      fi
+    }
 
-	fi
-
+---
 
 
 # Un dernier truc cool
