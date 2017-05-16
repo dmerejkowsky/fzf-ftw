@@ -265,6 +265,17 @@ Quand la liste est très grande, `fzf` permet quand même de sélectionner
 
 ---
 
+# Naviguer dans les répertoires
+
+De même, fzf peut vous lister les sous-répertoires, et vous y
+emmener après appui sur `<ALT-C>`.
+
+
+Après sélection d'un des sous-répertoires, et appui sur entrée,
+`fzf` vous y emmènera comme si vous aviez fait `cd sous/répertoire`
+
+---
+
 # Remplacer find (1)
 
 Lister les fichiers d'un répertoire (récursivement)
@@ -342,10 +353,17 @@ passer le résultat à `:DoSomething`
 
 ---
 
-# Remplacer autojump
+# Remplacer autojump / z
 
+---
 
-Une <del>pile de hacks</del> collection de petit bouts de code et réglages
+# Disclaimer
+
+En vrai ça on peut utiliser fzf et z ensemble: plus d'infos dans le
+[wiki fzf](https://github.com/junegunn/fzf/wiki/examples#z)
+
+Dans la suite je vais montrer comment j'ai réimplémenté `z` from scratch.
+(Parce que c'est rigolo)
 
 
 ---
@@ -397,39 +415,10 @@ courant.
 
 ---
 
-# Définir un "widget"
+# Dernière étape
 
-Dans `.zshrc`:
-
-    !bash
-    fzf-cd-widget() {
-    ret=$(cwd-history list | fzf --tac)
-    builtin cd "${ret}"
-    if [[ $? -ne 0 ]]; then
-        cwd-history remove "${ret}"
-    fi
-    }
-    zle -N fzf-cd-widget
-
----
-
-# Assigner un racourci:
-
-Dans `.zshrc`:
-
-    !bash
-    bindkey '\ed' fzf-cd-widget
-    bindkey -s '\ec' '\ed\n'
-
-Oui il y en a deux. Le second appelle le premier et rajoute '\n' à la fin.
-J'ai pas trouvé mieux :/
-
----
-
-# Ou sinon
-
-Pour les gens qui veulent pas changer leurs habitudes, on peut
-ré-implementer `z` complètement:
+Et du coup on a tout ce qui faut pour ré-implémenter `z`
+complètement:
 
 
     !bash
@@ -449,6 +438,10 @@ ré-implementer `z` complètement:
 
 
 # Un dernier truc cool
+
+----
+
+# Du shell vers l'éditeur et vice-versa
 
 On peut aussi partager des infos entre vim et le shell.
 
