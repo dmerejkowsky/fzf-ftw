@@ -501,6 +501,7 @@ On peut aussi aller dans l'autre sens:
 * Forkez cette présentation [sur github](
   https://github.com/dmerejkowsky/fzf-ftw)
 * Mon site: [https://dmerej.info](https://dmerej.info)
+* Mon article de blog sur le sujet: [fzf for the win](https://dmerej.info/blog/post/fzf-for-the-win/)
 * Mastodon: `@dmerej@mamot.fr`
 * IRC: `dmerejkowsky` sur `freenode` et `irc.mozilla.org`
 * Twitter: `@d_merej`
